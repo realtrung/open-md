@@ -1,0 +1,10 @@
+.markdown-body {
+  @apply prose prose-gray;
+  max-width: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .markdown-body {
+    @apply prose-invert;
+  }
+}
