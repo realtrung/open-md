@@ -29,7 +29,7 @@ npm install -g open-md
 open-md document.md
 ```
 
-Give your coding agent this [document](https://raw.githubusercontent.com/realtrung/open-md/main/AGENT_SETUP.md) to set up:
+Give your coding agent this [document](AGENT_SETUP.md) to set up:
 
 ```
 https://raw.githubusercontent.com/realtrung/open-md/main/AGENT_SETUP.md
