@@ -11,6 +11,15 @@ const HLJS_BASE = `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/${HLJS_VE
 const MERMAID_VERSION = '11.4.1';
 const MERMAID_URL = `https://cdn.jsdelivr.net/npm/mermaid@${MERMAID_VERSION}/dist/mermaid.esm.min.mjs`;
 
+const KATEX_VERSION = '0.16.11';
+const KATEX_BASE = `https://cdn.jsdelivr.net/npm/katex@${KATEX_VERSION}/dist`;
+
+// Heuristic: a $$…$$ block or a $…$ inline span. False positives only cost an
+// unnecessary asset load; KaTeX auto-render leaves code/pre untouched.
+function hasMath(body: string): boolean {
+  return /\$\$[\s\S]+?\$\$/.test(body) || /\$[^$\n]+\$/.test(body);
+}
+
 const md = new MarkdownIt({
   // Input is a local file authored by the user/agent (trusted), and docs
   // often contain intentional inline HTML. Deliberate trust assumption.
@@ -61,6 +70,16 @@ function collectAssets(body: string): Assets {
   if (body.includes('class="mermaid"')) {
     tail.push(
       `<script type="module">import mermaid from '${MERMAID_URL}'; mermaid.initialize({ startOnLoad: true });</script>`,
+    );
+  }
+
+  // KaTeX renders $…$ / $$…$$ found anywhere in the document body.
+  if (hasMath(body)) {
+    head.push(`<link rel="stylesheet" href="${KATEX_BASE}/katex.min.css">`);
+    tail.push(
+      `<script defer src="${KATEX_BASE}/katex.min.js"></script>`,
+      `<script defer src="${KATEX_BASE}/contrib/auto-render.min.js"></script>`,
+      `<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}],throwOnError:false});});</script>`,
     );
   }
 
