@@ -69,4 +69,10 @@ img { max-width: 100%; }
 hr { border: 0; border-top: 1px solid var(--border); margin: 2rem 0; }
 .task-list-item { list-style: none; }
 .task-list-item input { margin: 0 0.4em 0 -1.4em; }
+@media print {
+  main.markdown-body { max-width: none; padding: 0; }
+  a { color: inherit; }
+  pre, blockquote, table, img { break-inside: avoid; }
+  h1, h2, h3, h4, h5, h6 { break-after: avoid; }
+}
 `;
