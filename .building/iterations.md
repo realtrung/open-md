@@ -2,3 +2,4 @@
 
 - [x] [I1 Foundation](i1-foundation/plan.md)
 - [x] [I2 Quality](i2-quality/plan.md)
+- [.] [I3 Fixes](i3-fixes/plan.md)
