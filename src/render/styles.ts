@@ -14,6 +14,8 @@ body {
   margin: 0;
   background: #ffffff;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 @media (prefers-color-scheme: dark) {
   body {
@@ -32,5 +34,31 @@ main.markdown-body {
   a { color: inherit; }
   pre, blockquote, table, img { break-inside: avoid; }
   h1, h2, h3, h4, h5, h6 { break-after: avoid; }
+}
+
+/* Inline code: remove Tailwind Typography's backtick wrappers; add pill highlight */
+.markdown-body :not(pre) > code {
+  font-weight: 400;
+  background-color: rgba(175, 184, 193, 0.2);
+  border-radius: 3px;
+  padding: 0.2em 0.4em;
+}
+.markdown-body :not(pre) > code::before,
+.markdown-body :not(pre) > code::after {
+  content: none;
+}
+
+/* Mermaid: override prose pre dark background; diagram floats on page */
+.markdown-body pre.mermaid {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  text-align: center;
+  font-size: inherit;
+  line-height: normal;
+}
+.markdown-body pre.mermaid svg {
+  max-width: 100%;
+  height: auto;
 }
 `;

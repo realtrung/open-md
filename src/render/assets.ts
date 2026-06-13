@@ -23,7 +23,7 @@ export function collectAssets(body: string): Assets {
   // A mermaid container (`<pre class="mermaid">`) emitted by the fence rule.
   if (body.includes('class="mermaid"')) {
     tail.push(
-      `<script type="module">import mermaid from '${MERMAID_URL}'; const dark = matchMedia('(prefers-color-scheme: dark)').matches; mermaid.initialize({ startOnLoad: true, theme: dark ? 'dark' : 'default' });</script>`,
+      `<script type="module">import mermaid from '${MERMAID_URL}'; const dark = matchMedia('(prefers-color-scheme: dark)').matches; mermaid.initialize({ startOnLoad: true, theme: dark ? 'dark' : 'neutral', themeVariables: { background: 'transparent' } });</script>`,
     );
   }
 
