@@ -23,6 +23,8 @@ jobs:
 
       - run: npm ci
 
+      - run: npm run generate
+
       - uses: changesets/action@v1
         with:
           publish: npm run release
