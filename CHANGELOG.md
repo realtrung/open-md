@@ -1,5 +1,11 @@
 # open-md
 
+## 0.3.0
+
+### Minor Changes
+
+- fdb5c86: `render()` now returns `{ html, parseMs }` and `convertFile()` returns `{ outputPath, parseMs }`. The CLI prints parse time to stderr after each conversion.
+
 ## 0.2.0
 
 ### Minor Changes
