@@ -1,6 +1,7 @@
 import MarkdownIt from 'markdown-it';
 import footnote from 'markdown-it-footnote';
 import taskLists from 'markdown-it-task-lists';
+import { highlightCode } from './highlight.js';
 
 const DEFAULT_TITLE = 'open-md';
 
@@ -13,15 +14,23 @@ export const md = new MarkdownIt({
   .use(footnote)
   .use(taskLists);
 
-// Mermaid fences become a plain container the browser renders later;
-// every other fence keeps markdown-it's default `language-*` class.
 const defaultFence = md.renderer.rules.fence!.bind(md.renderer.rules);
 md.renderer.rules.fence = (tokens, idx, options, env, self) => {
   const token = tokens[idx]!;
-  if (token.info.trim().toLowerCase() === 'mermaid') {
+  const lang = token.info.trim().toLowerCase();
+
+  if (lang === 'mermaid') {
     return `<pre class="mermaid">${md.utils.escapeHtml(token.content)}</pre>\n`;
   }
-  return defaultFence(tokens, idx, options, env, self);
+
+  // Explicit language: try Shiki. Fall back to plain on failure.
+  if (lang) {
+    const highlighted = highlightCode(token.content, lang);
+    if (highlighted) return highlighted + '\n';
+  }
+
+  // Unlabeled fence or unrecognized language: plain monospace.
+  return `<pre><code>${md.utils.escapeHtml(token.content)}</code></pre>\n`;
 };
 
 export function deriveTitle(markdown: string): string {

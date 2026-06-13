@@ -8,7 +8,7 @@ export function outputPathFor(inputPath: string): string {
 
 // Read a markdown file, render it, and write the HTML next to the source.
 // Returns the output path. Throws a clear error for unusable input.
-export function convertFile(inputPath: string): string {
+export async function convertFile(inputPath: string): Promise<string> {
   if (!/\.md$/i.test(inputPath)) {
     throw new Error(`open-md: not a .md file: ${inputPath}`);
   }
@@ -24,6 +24,6 @@ export function convertFile(inputPath: string): string {
   }
 
   const outputPath = outputPathFor(inputPath);
-  writeFileSync(outputPath, render(readFileSync(inputPath, 'utf8')), 'utf8');
+  writeFileSync(outputPath, await render(readFileSync(inputPath, 'utf8')), 'utf8');
   return outputPath;
 }
