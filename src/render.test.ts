@@ -74,6 +74,27 @@ describe('render', () => {
     });
   });
 
+  describe('syntax highlighting assets', () => {
+    it('injects highlight.js when a fenced code block is present', () => {
+      const html = render('```js\nconst x = 1;\n```');
+      expect(html).toContain('highlight.js');
+      expect(html).toContain('hljs.highlightAll()');
+      expect(html).toContain('language-js');
+    });
+
+    it('does not inject highlight.js when there is no code block', () => {
+      const html = render('# Just prose\n\nno code here');
+      expect(html).not.toContain('highlight.js');
+      expect(html).not.toContain('hljs');
+    });
+
+    it('does not inject highlight.js for a mermaid-only document', () => {
+      const html = render('```mermaid\ngraph TD; A-->B;\n```');
+      expect(html).toContain('class="mermaid"');
+      expect(html).not.toContain('highlight.js');
+    });
+  });
+
   describe('trusted HTML passthrough', () => {
     it('allows intentional inline HTML through', () => {
       expect(render('<div class="note">hi</div>')).toContain('<div class="note">hi</div>');
