@@ -19,7 +19,8 @@
     "node": ">=20"
   },
   "scripts": {
-    "build": "node scripts/generate-typography-css.mjs && tsc -p tsconfig.build.json",
+    "generate": "node scripts/generate-typography-css.mjs",
+    "build": "npm run generate && tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest",
