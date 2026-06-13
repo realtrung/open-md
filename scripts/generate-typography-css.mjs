@@ -11,7 +11,15 @@ const output = resolve(root, 'src/render/typography-generated.ts');
 // 1. Run Tailwind CSS CLI to generate the prose CSS.
 execFileSync(
   'npx',
-  ['tailwindcss', '-i', input, '-o', '/tmp/open-md-tw.css', '--config', resolve(root, 'tailwind.config.cjs')],
+  [
+    'tailwindcss',
+    '-i',
+    input,
+    '-o',
+    '/tmp/open-md-tw.css',
+    '--config',
+    resolve(root, 'tailwind.config.cjs'),
+  ],
   { stdio: 'inherit', cwd: root },
 );
 

@@ -58,7 +58,9 @@ describe('render', () => {
     });
 
     it('autolinks bare URLs', async () => {
-      expect(await render('see https://example.com here')).toContain('<a href="https://example.com"');
+      expect(await render('see https://example.com here')).toContain(
+        '<a href="https://example.com"',
+      );
     });
   });
 
