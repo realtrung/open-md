@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { openCommand } from './open-browser.js';
+import { openCommand } from './open.js';
 
 describe('openCommand', () => {
   it('uses open on macOS', () => {

@@ -1,5 +1,5 @@
 import { readFileSync, statSync, writeFileSync } from 'node:fs';
-import { render } from './render/index.js';
+import { render } from '../render/render.js';
 
 // The HTML is written beside the source: design.md -> design.md.html.
 export function outputPathFor(inputPath: string): string {

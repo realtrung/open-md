@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { mkdtempSync, writeFileSync, readFileSync, rmSync, mkdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { convertFile, outputPathFor } from './convert-file.js';
+import { convertFile, outputPathFor } from './convert.js';
 
 function tmp(): string {
   return mkdtempSync(join(tmpdir(), 'open-md-'));

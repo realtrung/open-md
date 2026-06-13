@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { parseCliArgs } from './cli-args.js';
+import { parseCliArgs } from './args.js';
 
 describe('parseCliArgs', () => {
   it('takes the file as a positional and opens by default', () => {

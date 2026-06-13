@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import { resolve } from 'node:path';
-import { parseCliArgs } from './cli-args.js';
-import { convertFile } from './convert-file.js';
-import { openInBrowser } from './open-browser.js';
+import { parseCliArgs } from './args.js';
+import { convertFile } from '../convert/convert.js';
+import { openInBrowser } from '../open/open.js';
 
 function fail(message: string): never {
   console.error(message);
