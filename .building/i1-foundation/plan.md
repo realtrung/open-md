@@ -16,7 +16,7 @@ Repo toolchain set up as chore work before the first RGR cycle (not a slice):
 ## Slice Status
 
 - [x] [S1 Core conversion pipeline](#s1-goal)
-- [.] [S2 Rich rendering](#s2-goal)
+- [x] [S2 Rich rendering](#s2-goal)
 - [ ] [S3 Theming and polish](#s3-goal)
 
 ## Scope

@@ -2,6 +2,7 @@
 
 ## S2 Rich rendering
 
+- I1-S2-03 (2026-06-13): `$…$` and `$$…$$` math renders with KaTeX auto-render (`throwOnError:false`), injected from a pinned CDN only when the document appears to contain math. Completes S2.
 - I1-S2-02 (2026-06-13): ` ```mermaid ` blocks render as diagrams — the mermaid ESM module and `mermaid.initialize` are injected from a pinned CDN only when the document contains a mermaid block.
 - I1-S2-01 (2026-06-13): Fenced code blocks are syntax-highlighted with highlight.js, injected from a pinned CDN only when the document contains code. Establishes the conditional-asset seam that mermaid and math reuse.
 
