@@ -14,8 +14,7 @@ export const md = new MarkdownIt({
   .use(footnote)
   .use(taskLists);
 
-const defaultFence = md.renderer.rules.fence!.bind(md.renderer.rules);
-md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+md.renderer.rules.fence = (tokens, idx, _options, _env, _self) => {
   const token = tokens[idx]!;
   const lang = token.info.trim().toLowerCase();
 
