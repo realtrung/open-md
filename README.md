@@ -52,7 +52,7 @@ The generated HTML lives next to the source file:
 docs/plan.md  →  docs/plan.md.html
 ```
 
-Each output is a standalone HTML document. Open it in any browser, share it, or commit it alongside the source.
+Each output is a standalone HTML document. Open it in any browser or share it.
 
 ## Known Limitations
 

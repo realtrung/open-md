@@ -50,4 +50,4 @@ Add this to `.claude/settings.json` in the repo. It fires after every file write
 
 > On headless or CI environments, append `--no-open` to skip launching the browser and only generate the HTML file.
 
-> Add `*.md.html` to the repo's `.gitignore` to avoid committing generated files.
+> **Important:** Add `*.md.html` to the repo's `.gitignore` to avoid committing generated files.
