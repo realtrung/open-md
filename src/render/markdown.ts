@@ -19,7 +19,7 @@ export const md = new MarkdownIt({
       s
         .toLowerCase()
         .trim()
-        .replace(/[^\w\s-]/g, '')  // strip punctuation — GitHub keeps only alphanum, spaces, hyphens
+        .replace(/[^\w\s-]/g, '') // strip punctuation — GitHub keeps only alphanum, spaces, hyphens
         .replace(/\s+/g, '-')
         .replace(/-+/g, '-')
         .replace(/^-+|-+$/g, ''),
