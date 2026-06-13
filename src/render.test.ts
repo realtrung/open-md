@@ -108,6 +108,24 @@ describe('render', () => {
     });
   });
 
+  describe('math (KaTeX) assets', () => {
+    it('injects KaTeX when inline math is present', () => {
+      const html = render('Euler: $e^{i\\pi}+1=0$.');
+      expect(html).toContain('katex');
+      expect(html).toContain('renderMathInElement');
+    });
+
+    it('injects KaTeX for display math', () => {
+      expect(render('$$\\int_0^1 x\\,dx$$')).toContain('renderMathInElement');
+    });
+
+    it('does not inject KaTeX without math', () => {
+      const html = render('# prose\n\njust text, no math');
+      expect(html).not.toContain('katex');
+      expect(html).not.toContain('renderMathInElement');
+    });
+  });
+
   describe('trusted HTML passthrough', () => {
     it('allows intentional inline HTML through', () => {
       expect(render('<div class="note">hi</div>')).toContain('<div class="note">hi</div>');
