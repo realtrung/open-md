@@ -119,6 +119,14 @@ describe('render', () => {
     });
   });
 
+  describe('typography styles', () => {
+    it('inlines Tailwind Typography prose styles', async () => {
+      const html = await render('# Hello\n\nparagraph');
+      // Tailwind Typography injects --tw-prose-* custom properties.
+      expect(html).toContain('--tw-prose');
+    });
+  });
+
   describe('theming (OS dark mode)', () => {
     it('declares an OS-following color scheme with a dark block', async () => {
       const html = await render('# x');
