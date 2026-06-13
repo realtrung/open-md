@@ -95,6 +95,19 @@ describe('render', () => {
     });
   });
 
+  describe('mermaid assets', () => {
+    it('injects mermaid when a mermaid block is present', () => {
+      const html = render('```mermaid\ngraph TD; A-->B;\n```');
+      expect(html).toContain('mermaid.initialize');
+      expect(html).toContain('mermaid@');
+    });
+
+    it('does not inject mermaid without a mermaid block', () => {
+      const html = render('# prose\n\n```js\nconst x = 1;\n```');
+      expect(html).not.toContain('mermaid.initialize');
+    });
+  });
+
   describe('trusted HTML passthrough', () => {
     it('allows intentional inline HTML through', () => {
       expect(render('<div class="note">hi</div>')).toContain('<div class="note">hi</div>');
