@@ -1,5 +1,9 @@
 # I1 Foundation Changelog
 
+## S2 Rich rendering
+
+- I1-S2-01 (2026-06-13): Fenced code blocks are syntax-highlighted with highlight.js, injected from a pinned CDN only when the document contains code. Establishes the conditional-asset seam that mermaid and math reuse.
+
 ## S1 Core conversion pipeline
 
 - I1-S1-02 (2026-06-13): `npx open-md <file.md>` reads the file, writes the rendered `<file>.md.html` beside it, and opens it in the default browser; `--no-open` skips launching. Missing, non-`.md`, and directory inputs fail with a clear message and exit 1. Args via `node:util.parseArgs`; browser launch via a per-platform spawn, no dependency.
