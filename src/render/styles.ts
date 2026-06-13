@@ -1,6 +1,3 @@
-// Base typography and layout for the rendered document. Inlined into the
-// HTML <head> so the page is readable the moment it loads. Colors follow the
-// OS light/dark preference via CSS variables.
 export const baseCss = `
 :root {
   color-scheme: light dark;

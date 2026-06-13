@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render } from './render.js';
+import { render } from './index.js';
 
 describe('render', () => {
   describe('document shell', () => {

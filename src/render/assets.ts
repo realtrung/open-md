@@ -1,0 +1,56 @@
+const HLJS_VERSION = '11.10.0';
+const HLJS_BASE = `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/${HLJS_VERSION}`;
+
+const MERMAID_VERSION = '11.4.1';
+const MERMAID_URL = `https://cdn.jsdelivr.net/npm/mermaid@${MERMAID_VERSION}/dist/mermaid.esm.min.mjs`;
+
+const KATEX_VERSION = '0.16.11';
+const KATEX_BASE = `https://cdn.jsdelivr.net/npm/katex@${KATEX_VERSION}/dist`;
+
+// Heuristic: a $$…$$ block or a $…$ inline span. False positives only cost an
+// unnecessary asset load; KaTeX auto-render leaves code/pre untouched.
+function hasMath(body: string): boolean {
+  return /\$\$[\s\S]+?\$\$/.test(body) || /\$[^$\n]+\$/.test(body);
+}
+
+export interface Assets {
+  head: string[];
+  body: string[];
+}
+
+// CDN assets are injected only when the rendered body actually uses the feature.
+export function collectAssets(body: string): Assets {
+  const head: string[] = [];
+  const tail: string[] = [];
+
+  // A fenced code block (`<pre><code`) — but not a mermaid container.
+  if (body.includes('<pre><code')) {
+    head.push(
+      `<link rel="stylesheet" href="${HLJS_BASE}/styles/github.min.css" media="(prefers-color-scheme: light)">`,
+      `<link rel="stylesheet" href="${HLJS_BASE}/styles/github-dark.min.css" media="(prefers-color-scheme: dark)">`,
+    );
+    tail.push(
+      `<script src="${HLJS_BASE}/highlight.min.js"></script>`,
+      `<script>hljs.highlightAll();</script>`,
+    );
+  }
+
+  // A mermaid container (`<pre class="mermaid">`) emitted by the fence rule.
+  if (body.includes('class="mermaid"')) {
+    tail.push(
+      `<script type="module">import mermaid from '${MERMAID_URL}'; const dark = matchMedia('(prefers-color-scheme: dark)').matches; mermaid.initialize({ startOnLoad: true, theme: dark ? 'dark' : 'default' });</script>`,
+    );
+  }
+
+  // KaTeX renders $…$ / $$…$$ found anywhere in the document body.
+  if (hasMath(body)) {
+    head.push(`<link rel="stylesheet" href="${KATEX_BASE}/katex.min.css">`);
+    tail.push(
+      `<script defer src="${KATEX_BASE}/katex.min.js"></script>`,
+      `<script defer src="${KATEX_BASE}/contrib/auto-render.min.js"></script>`,
+      `<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}],throwOnError:false});});</script>`,
+    );
+  }
+
+  return { head, body: tail };
+}
