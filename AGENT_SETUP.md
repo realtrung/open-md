@@ -27,19 +27,19 @@ To make this automatic going forward, pick one of the following.
 Add this line to the repo's `AGENTS.md` (or `CLAUDE.md` for Claude Code):
 
 ```
-After writing or creating a .md file, run `npx --yes open-md@latest <file>` so the user can read it as a clean, readable document.
+After writing, creating, or editing a .md file, run `npx --yes open-md@latest <file>` so the user can read it as a clean, readable document.
 ```
 
 ### 2. Automatic hook
 
-Add this to `.claude/settings.json` in the repo. It fires after every file write, so you won't need to remember to run the command manually:
+Add this to `.claude/settings.json` in the repo. It fires after every file write or edit, so you won't need to remember to run the command manually:
 
 ```json
 {
   "hooks": {
     "PostToolUse": [
       {
-        "matcher": "Write",
+        "matcher": "Write|Edit",
         "hooks": [
           {
             "type": "command",
