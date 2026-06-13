@@ -144,6 +144,12 @@ describe('render', () => {
       expect(html).toContain('mermaid.initialize');
       expect(html).toMatch(/matchMedia[\s\S]*theme/);
     });
+
+    it('includes print styles that avoid breaking blocks across pages', () => {
+      const html = render('# x');
+      expect(html).toContain('@media print');
+      expect(html).toContain('break-inside: avoid');
+    });
   });
 
   describe('trusted HTML passthrough', () => {
