@@ -8,6 +8,9 @@ const DEFAULT_TITLE = 'open-md';
 const HLJS_VERSION = '11.10.0';
 const HLJS_BASE = `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/${HLJS_VERSION}`;
 
+const MERMAID_VERSION = '11.4.1';
+const MERMAID_URL = `https://cdn.jsdelivr.net/npm/mermaid@${MERMAID_VERSION}/dist/mermaid.esm.min.mjs`;
+
 const md = new MarkdownIt({
   // Input is a local file authored by the user/agent (trusted), and docs
   // often contain intentional inline HTML. Deliberate trust assumption.
@@ -51,6 +54,13 @@ function collectAssets(body: string): Assets {
     tail.push(
       `<script src="${HLJS_BASE}/highlight.min.js"></script>`,
       `<script>hljs.highlightAll();</script>`,
+    );
+  }
+
+  // A mermaid container (`<pre class="mermaid">`) emitted by the fence rule.
+  if (body.includes('class="mermaid"')) {
+    tail.push(
+      `<script type="module">import mermaid from '${MERMAID_URL}'; mermaid.initialize({ startOnLoad: true });</script>`,
     );
   }
 
