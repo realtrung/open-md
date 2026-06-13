@@ -29,6 +29,12 @@ npm install -g open-md
 open-md document.md
 ```
 
+Give your coding agent this link to set up:
+
+```
+https://raw.githubusercontent.com/realtrung/open-md/main/AGENT_SETUP.md
+```
+
 ## Features
 
 - **GitHub-Flavored Markdown** — tables, task lists, footnotes, strikethrough, autolinks.
