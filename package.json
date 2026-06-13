@@ -33,9 +33,15 @@
   "homepage": "https://github.com/realtrung/open-md",
   "devDependencies": {
     "@changesets/cli": "^2.31.0",
+    "@types/markdown-it": "^14.1.2",
     "@types/node": "^25.9.3",
     "prettier": "^3.8.4",
     "typescript": "^6.0.3",
     "vitest": "^4.1.8"
+  },
+  "dependencies": {
+    "markdown-it": "^14.2.0",
+    "markdown-it-footnote": "^4.0.0",
+    "markdown-it-task-lists": "^2.1.1"
   }
 }
