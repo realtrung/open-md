@@ -1,4 +1,5 @@
 import MarkdownIt from 'markdown-it';
+import anchor from 'markdown-it-anchor';
 import footnote from 'markdown-it-footnote';
 import taskLists from 'markdown-it-task-lists';
 import { highlightCode } from './highlight.js';
@@ -12,7 +13,17 @@ export const md = new MarkdownIt({
   linkify: true,
 })
   .use(footnote)
-  .use(taskLists);
+  .use(taskLists)
+  .use(anchor, {
+    slugify: (s: string) =>
+      s
+        .toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, '')  // strip punctuation — GitHub keeps only alphanum, spaces, hyphens
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-+|-+$/g, ''),
+  });
 
 md.renderer.rules.fence = (tokens, idx, _options, _env, _self) => {
   const token = tokens[idx]!;

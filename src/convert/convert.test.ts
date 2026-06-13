@@ -24,7 +24,7 @@ describe('convertFile', () => {
       expect(out).toBe(join(dir, 'doc.md.html'));
       const html = readFileSync(out, 'utf8');
       expect(html).toContain('<title>Title</title>');
-      expect(html).toContain('<h1>Title</h1>');
+      expect(html).toMatch(/<h1[^>]*id="title"[^>]*>Title<\/h1>/);
     } finally {
       rmSync(dir, { recursive: true, force: true });
     }

@@ -26,8 +26,9 @@ describe('render', () => {
   });
 
   describe('core GFM', () => {
-    it('renders headings', async () => {
-      expect(await render('# Title')).toContain('<h1>Title</h1>');
+    it('renders headings with anchor ids', async () => {
+      const html = await render('# Title');
+      expect(html).toMatch(/<h1[^>]*id="title"[^>]*>Title<\/h1>/);
     });
 
     it('renders unordered lists', async () => {
