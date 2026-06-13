@@ -1,0 +1,10 @@
+node_modules
+dist
+coverage
+*.md.html
+package-lock.json
+
+# Planning artifacts — governed by the planning-style skill, not prettier
+.building
+.agents
+.changeset/*.md

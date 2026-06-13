@@ -1,14 +1,41 @@
 {
   "name": "open-md",
   "version": "0.0.1",
-  "description": "npx open-md open-in-browser.md",
+  "description": "Convert a markdown file to a readable HTML page and open it in the browser.",
   "author": {
-	"name": "Trung Lai"
-	  },
+    "name": "Trung Lai"
+  },
   "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "npm run build && changeset publish"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/realtrung/open-md.git"
   },
-  "homepage": "https://github.com/realtrung/open-md"
+  "homepage": "https://github.com/realtrung/open-md",
+  "devDependencies": {
+    "@changesets/cli": "^2.31.0",
+    "@types/node": "^25.9.3",
+    "prettier": "^3.8.4",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.8"
+  }
 }
