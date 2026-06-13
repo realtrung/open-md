@@ -20,9 +20,10 @@ describe('convertFile', () => {
     try {
       const input = join(dir, 'doc.md');
       writeFileSync(input, '# Title\n\nhello');
-      const out = await convertFile(input);
-      expect(out).toBe(join(dir, 'doc.md.html'));
-      const html = readFileSync(out, 'utf8');
+      const { outputPath, parseMs } = await convertFile(input);
+      expect(outputPath).toBe(join(dir, 'doc.md.html'));
+      expect(parseMs).toBeGreaterThanOrEqual(0);
+      const html = readFileSync(outputPath, 'utf8');
       expect(html).toContain('<title>Title</title>');
       expect(html).toMatch(/<h1[^>]*id="title"[^>]*>Title<\/h1>/);
     } finally {

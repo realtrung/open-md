@@ -16,12 +16,14 @@ async function main(argv: string[]): Promise<void> {
   }
 
   let outputPath: string;
+  let parseMs: number;
   try {
-    outputPath = await convertFile(resolve(file));
+    ({ outputPath, parseMs } = await convertFile(resolve(file)));
   } catch (error) {
     fail(error instanceof Error ? error.message : String(error));
   }
 
+  console.error(`parsed in ${parseMs.toFixed(1)}ms`);
   console.log(outputPath);
   if (open) {
     openInBrowser(outputPath);
