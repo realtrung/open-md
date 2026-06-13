@@ -27,7 +27,8 @@
     "format:check": "prettier --check .",
     "changeset": "changeset",
     "version": "changeset version",
-    "release": "npm run build && changeset publish"
+    "release": "npm run build && changeset publish",
+    "prepare": "git config core.hooksPath .githooks"
   },
   "repository": {
     "type": "git",

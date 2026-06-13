@@ -1,0 +1,7 @@
+#!/bin/bash
+set -euo pipefail
+
+# Run type-check before pushing. Bypass with `git push --no-verify`.
+
+echo "pre-push: type-checking..."
+npm run typecheck
