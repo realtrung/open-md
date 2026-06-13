@@ -1,0 +1,14 @@
+{
+  "name": "open-md",
+  "version": "0.0.1",
+  "description": "npx open-md open-in-browser.md",
+  "author": {
+	"name": "Trung Lai"
+	  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/realtrung/open-md.git"
+  },
+  "homepage": "https://github.com/realtrung/open-md"
+}
