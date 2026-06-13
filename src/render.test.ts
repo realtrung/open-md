@@ -126,6 +126,32 @@ describe('render', () => {
     });
   });
 
+  describe('theming (OS dark mode)', () => {
+    it('declares an OS-following color scheme with a dark block', () => {
+      const html = render('# x');
+      expect(html).toContain('color-scheme: light dark');
+      expect(html).toContain('prefers-color-scheme: dark');
+    });
+
+    it('pairs light and dark highlight themes by OS preference', () => {
+      const html = render('```js\nconst x = 1;\n```');
+      expect(html).toContain('github-dark');
+      expect(html).toContain('media="(prefers-color-scheme: dark)"');
+    });
+
+    it('initializes mermaid with an OS-aware theme', () => {
+      const html = render('```mermaid\ngraph TD; A-->B;\n```');
+      expect(html).toContain('mermaid.initialize');
+      expect(html).toMatch(/matchMedia[\s\S]*theme/);
+    });
+
+    it('includes print styles that avoid breaking blocks across pages', () => {
+      const html = render('# x');
+      expect(html).toContain('@media print');
+      expect(html).toContain('break-inside: avoid');
+    });
+  });
+
   describe('trusted HTML passthrough', () => {
     it('allows intentional inline HTML through', () => {
       expect(render('<div class="note">hi</div>')).toContain('<div class="note">hi</div>');

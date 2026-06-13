@@ -1,15 +1,25 @@
 // Base typography and layout for the rendered document. Inlined into the
-// HTML <head> so the page is readable the moment it loads. Light theme only;
-// dark mode and OS-preference theming arrive in S3.
+// HTML <head> so the page is readable the moment it loads. Colors follow the
+// OS light/dark preference via CSS variables.
 export const baseCss = `
 :root {
-  color-scheme: light;
+  color-scheme: light dark;
   --fg: #1f2328;
   --muted: #59636e;
   --bg: #ffffff;
   --border: #d1d9e0;
   --code-bg: #f6f8fa;
   --link: #0969da;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fg: #e6edf3;
+    --muted: #9198a1;
+    --bg: #0d1117;
+    --border: #30363d;
+    --code-bg: #161b22;
+    --link: #4493f8;
+  }
 }
 * { box-sizing: border-box; }
 body {
@@ -59,4 +69,10 @@ img { max-width: 100%; }
 hr { border: 0; border-top: 1px solid var(--border); margin: 2rem 0; }
 .task-list-item { list-style: none; }
 .task-list-item input { margin: 0 0.4em 0 -1.4em; }
+@media print {
+  main.markdown-body { max-width: none; padding: 0; }
+  a { color: inherit; }
+  pre, blockquote, table, img { break-inside: avoid; }
+  h1, h2, h3, h4, h5, h6 { break-after: avoid; }
+}
 `;
