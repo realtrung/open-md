@@ -14,6 +14,10 @@ If `open-md` is already installed globally, use the shorter form:
 open-md document.md
 ```
 
+> On headless or CI environments, append `--no-open` to skip launching the browser and only generate the HTML file.
+
+> **Important:** Add `*.md.html` to the repo's `.gitignore` to avoid committing generated files.
+
 ## Setup options
 
 To make this automatic going forward, pick one of the following.
@@ -47,7 +51,3 @@ Add this to `.claude/settings.json` in the repo. It fires after every file write
   }
 }
 ```
-
-> On headless or CI environments, append `--no-open` to skip launching the browser and only generate the HTML file.
-
-> **Important:** Add `*.md.html` to the repo's `.gitignore` to avoid committing generated files.
