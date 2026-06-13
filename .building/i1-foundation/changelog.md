@@ -2,6 +2,7 @@
 
 ## S3 Theming and polish
 
+- I1-S3-02 (2026-06-13): Added print styles — full-width content and break-inside avoidance for code, tables, images, and blockquotes so the page prints/saves to PDF cleanly. Completes S3 and I1.
 - I1-S3-01 (2026-06-13): The rendered page follows the OS light/dark preference — base colors flip under `prefers-color-scheme`, highlight.js pairs light/`github-dark` themes, and mermaid initializes with a matching theme.
 
 ## S2 Rich rendering
