@@ -59,7 +59,10 @@ function collectAssets(body: string): Assets {
 
   // A fenced code block (`<pre><code`) — but not a mermaid container.
   if (body.includes('<pre><code')) {
-    head.push(`<link rel="stylesheet" href="${HLJS_BASE}/styles/github.min.css">`);
+    head.push(
+      `<link rel="stylesheet" href="${HLJS_BASE}/styles/github.min.css" media="(prefers-color-scheme: light)">`,
+      `<link rel="stylesheet" href="${HLJS_BASE}/styles/github-dark.min.css" media="(prefers-color-scheme: dark)">`,
+    );
     tail.push(
       `<script src="${HLJS_BASE}/highlight.min.js"></script>`,
       `<script>hljs.highlightAll();</script>`,
@@ -69,7 +72,7 @@ function collectAssets(body: string): Assets {
   // A mermaid container (`<pre class="mermaid">`) emitted by the fence rule.
   if (body.includes('class="mermaid"')) {
     tail.push(
-      `<script type="module">import mermaid from '${MERMAID_URL}'; mermaid.initialize({ startOnLoad: true });</script>`,
+      `<script type="module">import mermaid from '${MERMAID_URL}'; const dark = matchMedia('(prefers-color-scheme: dark)').matches; mermaid.initialize({ startOnLoad: true, theme: dark ? 'dark' : 'default' });</script>`,
     );
   }
 
