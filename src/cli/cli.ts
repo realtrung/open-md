@@ -9,7 +9,7 @@ function fail(message: string): never {
   process.exit(1);
 }
 
-function main(argv: string[]): void {
+async function main(argv: string[]): Promise<void> {
   const { file, open } = parseCliArgs(argv);
   if (!file) {
     fail('open-md: missing input file\nusage: open-md <file.md> [--no-open]');
@@ -17,7 +17,7 @@ function main(argv: string[]): void {
 
   let outputPath: string;
   try {
-    outputPath = convertFile(resolve(file));
+    outputPath = await convertFile(resolve(file));
   } catch (error) {
     fail(error instanceof Error ? error.message : String(error));
   }

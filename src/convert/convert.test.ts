@@ -15,12 +15,12 @@ describe('outputPathFor', () => {
 });
 
 describe('convertFile', () => {
-  it('writes <file>.md.html beside the source with rendered HTML', () => {
+  it('writes <file>.md.html beside the source with rendered HTML', async () => {
     const dir = tmp();
     try {
       const input = join(dir, 'doc.md');
       writeFileSync(input, '# Title\n\nhello');
-      const out = convertFile(input);
+      const out = await convertFile(input);
       expect(out).toBe(join(dir, 'doc.md.html'));
       const html = readFileSync(out, 'utf8');
       expect(html).toContain('<title>Title</title>');
@@ -30,27 +30,27 @@ describe('convertFile', () => {
     }
   });
 
-  it('throws for a non-.md file', () => {
+  it('throws for a non-.md file', async () => {
     const dir = tmp();
     try {
       const input = join(dir, 'notes.txt');
       writeFileSync(input, 'x');
-      expect(() => convertFile(input)).toThrow(/\.md/);
+      await expect(convertFile(input)).rejects.toThrow(/\.md/);
     } finally {
       rmSync(dir, { recursive: true, force: true });
     }
   });
 
-  it('throws when the file does not exist', () => {
-    expect(() => convertFile('/no/such/file.md')).toThrow(/not found/i);
+  it('throws when the file does not exist', async () => {
+    await expect(convertFile('/no/such/file.md')).rejects.toThrow(/not found/i);
   });
 
-  it('throws when the path is a directory', () => {
+  it('throws when the path is a directory', async () => {
     const dir = tmp();
     try {
       const sub = join(dir, 'sub.md');
       mkdirSync(sub);
-      expect(() => convertFile(sub)).toThrow(/director/i);
+      await expect(convertFile(sub)).rejects.toThrow(/director/i);
     } finally {
       rmSync(dir, { recursive: true, force: true });
     }

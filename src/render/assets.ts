@@ -1,6 +1,3 @@
-const HLJS_VERSION = '11.10.0';
-const HLJS_BASE = `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/${HLJS_VERSION}`;
-
 const MERMAID_VERSION = '11.4.1';
 const MERMAID_URL = `https://cdn.jsdelivr.net/npm/mermaid@${MERMAID_VERSION}/dist/mermaid.esm.min.mjs`;
 
@@ -22,18 +19,6 @@ export interface Assets {
 export function collectAssets(body: string): Assets {
   const head: string[] = [];
   const tail: string[] = [];
-
-  // A fenced code block (`<pre><code`) — but not a mermaid container.
-  if (body.includes('<pre><code')) {
-    head.push(
-      `<link rel="stylesheet" href="${HLJS_BASE}/styles/github.min.css" media="(prefers-color-scheme: light)">`,
-      `<link rel="stylesheet" href="${HLJS_BASE}/styles/github-dark.min.css" media="(prefers-color-scheme: dark)">`,
-    );
-    tail.push(
-      `<script src="${HLJS_BASE}/highlight.min.js"></script>`,
-      `<script>hljs.highlightAll();</script>`,
-    );
-  }
 
   // A mermaid container (`<pre class="mermaid">`) emitted by the fence rule.
   if (body.includes('class="mermaid"')) {

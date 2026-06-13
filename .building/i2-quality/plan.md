@@ -6,7 +6,7 @@ Raise output quality beyond I1's working baseline. Replace CDN-loaded highlight.
 
 ## Slice Status
 
-- [ ] [S1 Shiki syntax highlighting](#s1-goal)
+- [x] [S1 Shiki syntax highlighting](#s1-goal)
 - [ ] [S2 Tailwind Typography](#s2-goal)
 
 ## Scope
