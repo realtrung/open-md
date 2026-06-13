@@ -43,6 +43,11 @@ main.markdown-body {
   border-radius: 3px;
   padding: 0.2em 0.4em;
 }
+@media (prefers-color-scheme: dark) {
+  .markdown-body :not(pre) > code {
+    background-color: rgba(110, 118, 129, 0.4);
+  }
+}
 .markdown-body :not(pre) > code::before,
 .markdown-body :not(pre) > code::after {
   content: none;
