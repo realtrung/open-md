@@ -39,11 +39,20 @@ Add this to `.claude/settings.json` in the repo. It fires after every file write
   "hooks": {
     "PostToolUse": [
       {
-        "matcher": "Write|Edit",
+        "matcher": "Write",
         "hooks": [
           {
             "type": "command",
             "command": "FILE=$(jq -r '.tool_input.file_path // empty'); [[ \"$FILE\" == *.md ]] && npx --yes open-md@latest \"$FILE\" || true"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "FILE=$(jq -r '.tool_input.file_path // empty'); [[ \"$FILE\" == *.md ]] && npx --yes open-md@latest --no-open \"$FILE\" || true"
           }
         ]
       }
