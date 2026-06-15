@@ -1,5 +1,11 @@
 # open-md
 
+## 0.3.1
+
+### Patch Changes
+
+- 9b0e08a: Inline code styling changed from background pill to amber colored text.
+
 ## 0.3.0
 
 ### Minor Changes

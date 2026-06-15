@@ -1,6 +1,6 @@
 {
   "name": "open-md",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Convert a markdown file to a readable HTML page and open it in the browser.",
   "author": {
     "name": "Trung Lai"
