@@ -36,16 +36,14 @@ main.markdown-body {
   h1, h2, h3, h4, h5, h6 { break-after: avoid; }
 }
 
-/* Inline code: remove Tailwind Typography's backtick wrappers; add pill highlight */
+/* Inline code: remove Tailwind Typography's backtick wrappers; use colored text */
 .markdown-body :not(pre) > code {
   font-weight: 400;
-  background-color: rgba(175, 184, 193, 0.2);
-  border-radius: 3px;
-  padding: 0.2em 0.4em;
+  color: #92400e;
 }
 @media (prefers-color-scheme: dark) {
   .markdown-body :not(pre) > code {
-    background-color: rgba(110, 118, 129, 0.4);
+    color: #f59e0b;
   }
 }
 .markdown-body :not(pre) > code::before,
